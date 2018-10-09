@@ -1,6 +1,6 @@
 {
   "name": "ethval",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "Easier calculation and formatting of Ethereum values",
   "main": "dist/index.js",
   "module": "src/index.js",
@@ -38,6 +38,7 @@
     "babel-eslint": "^9.0.0",
     "babel-jest": "^23.6.0",
     "babel-jest-assertions": "^0.1.0",
+    "babel-plugin-add-module-exports": "^1.0.0",
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "bignumber.js": "^7.2.1",
@@ -74,6 +75,9 @@
   "babel": {
     "presets": [
       "env"
+    ],
+    "plugins": [
+      "add-module-exports"
     ]
   }
 }

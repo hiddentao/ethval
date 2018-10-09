@@ -3,7 +3,7 @@ import { isBN, toBN } from 'web3-utils'
 
 const toDecimal = v => (isBN(v) ? new Decimal(v.toString(10)) : new Decimal(v))
 
-module.exports = class EthValue {
+export default class EthValue {
   constructor (src, unit = 'wei') {
     if (src instanceof EthValue) {
       this._n = toDecimal(src._n)
