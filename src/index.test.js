@@ -192,10 +192,20 @@ describe('can output', () => {
   })
 })
 
-// describe('supports calculation via', () => {
-//   it('basic arithmetic', () => {
-//     const e = new EthVal('1.2345', 'eth')
-//
-//     expect(e.mul(10).div(5).toString()).toEqual()
-//   })
-// })
+describe('supports calculation via', () => {
+  it('basic arithmetic', () => {
+    const e = new EthVal('1.2345', 'eth').mul(10).div(5)
+    const e2 = new EthVal('1.2345').mul(2)
+
+    expect(e.toString()).toEqual('2.469')
+    expect(e.toString()).toEqual(e2.toString())
+
+    expect(
+      new EthVal('1')
+        .add('2.34')
+        .sub('5.23')
+        .mul('-1.2')
+        .toString()
+    ).toEqual('2.268')
+  })
+})
