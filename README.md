@@ -53,7 +53,7 @@ Basic arithmetic supported fully:
 const v = new EthVal(255)
 const b = await web3.eth.getBalance('0x...') // assume balance is 100 wei
 
-console.log( v.div(5).add(b).mul(2).sub(2).toString(16) ) // 0x64 (=100 in base-10)
+console.log( v.div(5).add(b).mul(2).sub(2).toString(16) ) // 0x12c (= 300 in base-10)
 ```
 
 ## API
