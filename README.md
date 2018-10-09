@@ -3,7 +3,7 @@
 [![Build Status](https://api.travis-ci.org/hiddentao/ethval.svg?branch=master)](https://travis-ci.org/hiddentao/ethval)
 [![Coverage Status](https://coveralls.io/repos/github/hiddentao/ethval/badge.svg?branch=master)](https://coveralls.io/github/hiddentao/ethval?branch=master)
 
-Easier calculation and formatting of Ethereum values
+Easier calculation and formatting of Ethereum values.
 
 * Supports floating point numbers
 * Easily convert between Wei, Gwei and Eth

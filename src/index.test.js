@@ -154,6 +154,26 @@ describe('can convert', () => {
 
     expect(e.toWei().toString()).toEqual('1234500000000000000')
   })
+
+  it('and throw an error if unit is uncertain', () => {
+    try {
+      new EthVal('1', 'bad').toWei()
+    } catch (err) {
+      expect(err).toBeDefined()
+    }
+
+    try {
+      new EthVal('1', 'bad').toGwei()
+    } catch (err) {
+      expect(err).toBeDefined()
+    }
+
+    try {
+      new EthVal('1', 'bad').toEth()
+    } catch (err) {
+      expect(err).toBeDefined()
+    }
+  })
 })
 
 describe('can output', () => {

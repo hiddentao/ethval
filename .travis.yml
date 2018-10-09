@@ -5,3 +5,12 @@ script:
 - npm run lint
 - npm run test:coverage && cat test-coverage/lcov.info | node_modules/.bin/coveralls
 - npm run build
+deploy:
+  skip_cleanup: true
+  provider: npm
+  email: ram@hiddentao.com
+  api_key:
+    secure: SuOl5w1wmAAobYrsNO7vvnA5ECNonEbyc7Nm7tIVlof//J8n8htEhzF/9kzmxKGN+iEm5bZi1YuqairRWoIPwTY6of63IYHdqxCQ0EVdJtvvwkArkGhA50Rg3Qh5VRDDKkyqjzOaK0eddayWZl2tGaJ+Sh5JhYuT2zR+NZwj725B26zrIOjQPoczFcfM32A0z20C4NFJa1Rxh+pA/L2Ju0F1f6/1Y7sGh9mGgetjAUQOetUf+sdKwYgI8DTckthWObkNYJZCK79cIjqhGzs5w+tY49HUpzQ6E6EJVeOMqOy95xhlMdchL4qqdFp0dm6bbGTJiQiz/bzP8iOiRw2jylN0WxG5W0Y98uc6dudeyDp65f3MLS8xpgNGhY+f8voRbFTwzIsmxdMnDL9w595v3bIlWDS9F7u6iVywKtrOPxhi/9yCCwdu5CcXTfH+7WX11JQPsTAO34odUnT8p3b/UWlJYTaDyL3ZepG//gbMUgS7TikPhQV95LWPqvj0KwvOsDGQBn9Rh7WgETuO2fuLzjClXYwUS7Uh1V2Ug5f81WFUwS0jsbSlCQEhCaBlrvtr0MUtC/qGCdXsQ2+YZgQwdaTjZ+e8FcUm/StsAFSUAte9lzJLoLrFUunmzSVmFG7MRXgYOLSKPoxVzwmLD8OeIrcI407E3yvdSClxCh3uxgE=
+  on:
+    tags: true
+    repo: hiddentao/ethval
