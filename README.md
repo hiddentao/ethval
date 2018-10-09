@@ -56,51 +56,94 @@ const b = await web3.eth.getBalance('0x...') // assume balance is 100 wei
 console.log( v.div(5).add(b).mul(2).sub(2).toString(16) ) // 0x12c (= 300 in base-10)
 ```
 
+Comparisons too:
+
+```js
+const { toBN } = require('web3-utils')
+
+const v = new EthVal(255)
+const v2 = new EthVal('0.2', 'eth')
+
+console.log( v2.lt(v) ) // false
+console.log( v.gt(200) ) // true
+console.log( v.lte(toBN('0xFFFF')) ) // true
+```
+
 ## API
 
-**`new EthValue(input, unit = 'wei')`**
+**`new EthVal(input, unit = 'wei')`**
 
-Constructs a new `EthValue` instance.
+Constructs a new `EthVal` instance.
 
 * `input` - can be a `Number`, a `string` (in base-10 or base-16/hex format),
-another `EthValue` instance, or a `BN` instance.
+another `EthVal` instance, or a `BN` instance.
 * `unit` - must be one of `eth`, `gwei` or `wei` (default).
 
 **`.toWei()`**
 
-Convert the value to its Wei equivalent and return a new `EthValue` instance.
+Convert the value to its Wei equivalent and return a new `EthVal` instance.
 
 **`.toGwei()`**
 
-Convert the value to its Gwei equivalent and return a new `EthValue` instance.
+Convert the value to its Gwei equivalent and return a new `EthVal` instance.
 
 **`.toEth()`**
 
-Convert the value to its Eth equivalent and return a new `EthValue` instance.
+Convert the value to its Eth equivalent and return a new `EthVal` instance.
 
 **`.add(input)`**
 
-Add `input` to this value and return a new `EthValue` instance.
+Add `input` to this value and return a new `EthVal` instance.
 
-* `input` - _same as for the `EthValue` constructor_
+* `input` - _same as for the `EthVal` constructor_
 
 **`.sub(input)`**
 
-Subtract `input` from this value and return a new `EthValue` instance.
+Subtract `input` from this value and return a new `EthVal` instance.
 
-* `input` - _same as for the `EthValue` constructor_
+* `input` - _same as for the `EthVal` constructor_
 
 **`.mul(input)`**
 
-Multiply `input` with this value and return a new `EthValue` instance.
+Multiply `input` with this value and return a new `EthVal` instance.
 
-* `input` - _same as for the `EthValue` constructor_
+* `input` - _same as for the `EthVal` constructor_
 
 **`.div(input)`**
 
-Divide this value by `input` and return a new `EthValue` instance.
+Divide this value by `input` and return a new `EthVal` instance.
 
-* `input` - _same as for the `EthValue` constructor_
+* `input` - _same as for the `EthVal` constructor_
+
+**`.eq(input)`**
+
+Get whether this value equals `input`. Returns `true` or `false`.
+
+* `input` - _same as for the `EthVal` constructor_
+
+**`.lt(input)`**
+
+Get whether this value is less than `input`. Returns `true` or `false`.
+
+* `input` - _same as for the `EthVal` constructor_
+
+**`.lte(input)`**
+
+Get whether this value is less than or equal to `input`. Returns `true` or `false`.
+
+* `input` - _same as for the `EthVal` constructor_
+
+**`.gt(input)`**
+
+Get whether this value is greater than `input`. Returns `true` or `false`.
+
+* `input` - _same as for the `EthVal` constructor_
+
+**`.gte(input)`**
+
+Get whether this value is greater than or equal to `input`. Returns `true` or `false`.
+
+* `input` - _same as for the `EthVal` constructor_
 
 **`.toString(base)`**
 

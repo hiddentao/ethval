@@ -228,4 +228,36 @@ describe('supports calculation via', () => {
         .toString()
     ).toEqual('2.268')
   })
+
+  it('arithmetic involving instances', () => {
+    const e = new EthVal(1)
+    const e2 = new EthVal(13)
+    const e3 = new EthVal(2)
+
+    expect(e.add(e2).div(e3).toString()).toEqual('7')
+  })
+})
+
+describe('supports boolean logic via', () => {
+  it('basic comparison', () => {
+    const e = new EthVal('1.2345', 'eth').mul(10).div(5)
+    const e2 = new EthVal('12').mul(2)
+    const e3 = toBN('24')
+
+    expect(e2.gt(e)).toEqual(true)
+    expect(e.lt(e2)).toEqual(true)
+    expect(e.gte(e2)).toEqual(false)
+
+    expect(new EthVal(e3).gt(e)).toEqual(true)
+    expect(e.lte(e3)).toEqual(true)
+    expect(e.gte(e3)).toEqual(false)
+
+    expect(e2.eq(e3)).toEqual(true)
+    expect(e2.lte(e3)).toEqual(true)
+    expect(e2.gte(e3)).toEqual(true)
+
+    expect(new EthVal(e3).eq(e2)).toEqual(true)
+    expect(new EthVal(e3).gte(e2)).toEqual(true)
+    expect(new EthVal(e3).lte(e2)).toEqual(true)
+  })
 })

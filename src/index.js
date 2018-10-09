@@ -3,9 +3,9 @@ import { isBN, toBN } from 'web3-utils'
 
 const toDecimal = v => (isBN(v) ? new Decimal(v.toString(10)) : new Decimal(v))
 
-export default class EthValue {
+export default class EthVal {
   constructor (src, unit = 'wei') {
-    if (src instanceof EthValue) {
+    if (src instanceof EthVal) {
       this._n = toDecimal(src._n)
       this._unit = src._unit
     } else {
@@ -14,8 +14,11 @@ export default class EthValue {
     }
     [ 'mul', 'sub', 'div', 'add' ].forEach(method => {
       this[method] = v => (
-        new EthValue(this._n[method].call(this._n, toDecimal(v)), this._unit)
+        new EthVal(this._n[method].call(this._n, toDecimal(v._n || v)), this._unit)
       )
+    })
+    ;[ 'gt', 'gte', 'lt', 'lte', 'eq' ].forEach(method => {
+      this[method] = v => this._n[method].call(this._n, toDecimal(v._n || v))
     })
   }
 
@@ -45,7 +48,7 @@ export default class EthValue {
 
   toWei () {
     if (this.isWei) {
-      return new EthValue(this)
+      return new EthVal(this)
     }
     if (this.isGwei) {
       const v = this.scaleDown(9)
@@ -68,7 +71,7 @@ export default class EthValue {
       return v
     }
     if (this.isGwei) {
-      return new EthValue(this)
+      return new EthVal(this)
     }
     if (this.isEth) {
       const v = this.scaleDown(9)
@@ -91,7 +94,7 @@ export default class EthValue {
       return v
     }
     if (this.isEth) {
-      return new EthValue(this)
+      return new EthVal(this)
     }
 
     throw new Error('Unit of measurement uncertain')
@@ -116,6 +119,6 @@ export default class EthValue {
   }
 
   toWeiBN () {
-    return toBN(new EthValue(this.toString(), this._unit).toWei().toString())
+    return toBN(new EthVal(this.toString(), this._unit).toWei().toString())
   }
 }
