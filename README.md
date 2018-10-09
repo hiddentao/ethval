@@ -33,7 +33,7 @@ Use it calculate the Wei/Gwei/Eth equivalent of a given value:
 ```js
 const v = new EthVal('1.234', 'eth')
 
-console.log( b.toGwei().toString() ) // output the Gwei equivalent of 1.1234 ETH
+console.log( b.toGwei().toString() ) // "1234000000000000"
 ```
 
 You can also output hex and binary strings:
