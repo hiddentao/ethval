@@ -69,25 +69,25 @@ Convert the value to its Eth equivalent and return a new `EthValue` instance.
 
 **`.add(input)`**
 
-Add `input` to this value return a new `EthValue` instance.
+Add `input` to this value and return a new `EthValue` instance.
 
 * `input` - _same as for the `EthValue` constructor_
 
 **`.sub(input)`**
 
-Subtrat `input` from this value return a new `EthValue` instance.
+Subtract `input` from this value and return a new `EthValue` instance.
 
 * `input` - _same as for the `EthValue` constructor_
 
 **`.mul(input)`**
 
-Multiply `input` with this value return a new `EthValue` instance.
+Multiply `input` with this value and return a new `EthValue` instance.
 
 * `input` - _same as for the `EthValue` constructor_
 
 **`.div(input)`**
 
-Divide `input` by this value return a new `EthValue` instance.
+Divide this value by `input` and return a new `EthValue` instance.
 
 * `input` - _same as for the `EthValue` constructor_
 
