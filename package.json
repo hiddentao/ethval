@@ -1,0 +1,79 @@
+{
+  "name": "ethval",
+  "version": "1.0.0",
+  "description": "Easier calculation and formatting of Ethereum values",
+  "main": "dist/index.js",
+  "module": "src/index.js",
+  "files": [
+    "src/index.js",
+    "dist"
+  ],
+  "scripts": {
+    "build": "babel src -d dist --ignore *.test.js",
+    "lint": "eslint src",
+    "test": "jest --no-cache",
+    "test:coverage": "yarn test --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hiddentao/ethval.git"
+  },
+  "keywords": [
+    "ethereum",
+    "value",
+    "formatting",
+    "decimal",
+    "bignumber",
+    "bn"
+  ],
+  "author": "Ramesh Nair <ram@hiddentao.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hiddentao/ethval/issues"
+  },
+  "homepage": "https://github.com/hiddentao/ethval#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-eslint": "^9.0.0",
+    "babel-jest": "^23.6.0",
+    "babel-jest-assertions": "^0.1.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "bignumber.js": "^7.2.1",
+    "coveralls": "^3.0.2",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb-base": "^12.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^7.1.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "ganache-core": "^2.2.1",
+    "jest": "^23.6.0",
+    "web3": "1.0.0-beta.33"
+  },
+  "dependencies": {
+    "decimal.js": "^10.0.1",
+    "web3-utils": "^1.0.0-beta.36"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "src/*.js"
+    ],
+    "coverageDirectory": "<rootDir>/test-coverage",
+    "transform": {
+      "^.+\\.js$": "<rootDir>/.jest/transform.js"
+    },
+    "setupTestFrameworkScriptFile": "<rootDir>/.jest/setupTestFrameworkScriptFile.js"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  }
+}

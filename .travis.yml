@@ -1,0 +1,7 @@
+language: node_js
+node_js:
+- 8.11.4
+script:
+- npm run lint
+- npm run test:coverage && cat test-coverage/lcov.info | node_modules/.bin/coveralls
+- npm run build
