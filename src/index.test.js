@@ -50,7 +50,7 @@ describe('can convert', () => {
 
   it('from wei to gwei', () => {
     const e = new EthVal('1000000000000000000').toGwei()
-    expect(e.toString()).toEqual('1000000000000000')
+    expect(e.toString()).toEqual('1000000000')
     expect(e.unit).toEqual('gwei')
     expect(e.isWei).toEqual(false)
     expect(e.isGwei).toEqual(true)
@@ -77,7 +77,7 @@ describe('can convert', () => {
 
   it('from eth to gwei', () => {
     const e = new EthVal('1', 'eth').toGwei()
-    expect(e.toString()).toEqual('1000000000000000')
+    expect(e.toString()).toEqual('1000000000')
     expect(e.unit).toEqual('gwei')
     expect(e.isWei).toEqual(false)
     expect(e.isGwei).toEqual(true)
@@ -94,7 +94,7 @@ describe('can convert', () => {
   })
 
   it('from gwei to wei', () => {
-    const e = new EthVal('1000000000000000', 'gwei').toWei()
+    const e = new EthVal('1000000000', 'gwei').toWei()
     expect(e.toString()).toEqual('1000000000000000000')
     expect(e.unit).toEqual('wei')
     expect(e.isWei).toEqual(true)
@@ -103,8 +103,8 @@ describe('can convert', () => {
   })
 
   it('from gwei to gwei', () => {
-    const e = new EthVal('1000000000000000', 'gwei').toGwei()
-    expect(e.toString()).toEqual('1000000000000000')
+    const e = new EthVal('1000000000', 'gwei').toGwei()
+    expect(e.toString()).toEqual('1000000000')
     expect(e.unit).toEqual('gwei')
     expect(e.isWei).toEqual(false)
     expect(e.isGwei).toEqual(true)
@@ -112,7 +112,7 @@ describe('can convert', () => {
   })
 
   it('from gwei to eth', () => {
-    const e = new EthVal('1000000000000000', 'gwei').toEth()
+    const e = new EthVal('1000000000', 'gwei').toEth()
     expect(e.toString()).toEqual('1')
     expect(e.unit).toEqual('eth')
     expect(e.isWei).toEqual(false)
@@ -132,7 +132,7 @@ describe('can convert', () => {
 
     expect(src.toString()).toEqual('1000000000000000000')
     expect(e.toString()).toEqual('1')
-    expect(g.toString()).toEqual('1000000000000000')
+    expect(g.toString()).toEqual('1000000000')
     expect(w.toString()).toEqual('1000000000000000000')
   })
 
@@ -146,7 +146,7 @@ describe('can convert', () => {
         .toEth()
         .toGwei()
         .toString()
-    ).toEqual('1000000000000000')
+    ).toEqual('1000000000')
   })
 
   it('from decimal eth to wei', () => {

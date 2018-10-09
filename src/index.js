@@ -48,7 +48,7 @@ module.exports = class EthValue {
       return new EthValue(this)
     }
     if (this.isGwei) {
-      const v = this.scaleDown(3)
+      const v = this.scaleDown(9)
       v._unit = 'wei'
       return v
     }
@@ -63,7 +63,7 @@ module.exports = class EthValue {
 
   toGwei () {
     if (this.isWei) {
-      const v = this.scaleUp(3)
+      const v = this.scaleUp(9)
       v._unit = 'gwei'
       return v
     }
@@ -71,7 +71,7 @@ module.exports = class EthValue {
       return new EthValue(this)
     }
     if (this.isEth) {
-      const v = this.scaleDown(15)
+      const v = this.scaleDown(9)
       v._unit = 'gwei'
       return v
     }
@@ -86,7 +86,7 @@ module.exports = class EthValue {
       return v
     }
     if (this.isGwei) {
-      const v = this.scaleUp(15)
+      const v = this.scaleUp(9)
       v._unit = 'eth'
       return v
     }
