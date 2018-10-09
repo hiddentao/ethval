@@ -24,6 +24,14 @@ describe('can be constructed', () => {
     expect(val.toString()).toEqual('255')
   })
 
+  it('from an existing instance', () => {
+    const val = new EthVal('1025')
+    const val2 = new EthVal(val)
+
+    expect(val.toString()).toEqual('1025')
+    expect(val2.toString()).toEqual('1025')
+  })
+
   it('and is wei by default', () => {
     const val = new EthVal(1025)
     expect(val.isWei).toEqual(true)
@@ -112,6 +120,22 @@ describe('can convert', () => {
     expect(e.isEth).toEqual(true)
   })
 
+  it('and will return a new instance', () => {
+    const src = new EthVal('1000000000000000000')
+    const w = src.toWei()
+    const g = src.toGwei()
+    const e = src.toEth()
+
+    expect(w).not.toEqual(src)
+    expect(g).not.toEqual(src)
+    expect(e).not.toEqual(src)
+
+    expect(src.toString()).toEqual('1000000000000000000')
+    expect(e.toString()).toEqual('1')
+    expect(g.toString()).toEqual('1000000000000000')
+    expect(w.toString()).toEqual('1000000000000000000')
+  })
+
   it('back and forth', () => {
     const e = new EthVal('1000000000000000000')
 
@@ -160,3 +184,11 @@ describe('can output', () => {
     expect(out.toString(10)).toEqual('1234500000000000000')
   })
 })
+
+// describe('supports calculation via', () => {
+//   it('basic arithmetic', () => {
+//     const e = new EthVal('1.2345', 'eth')
+//
+//     expect(e.mul(10).div(5).toString()).toEqual()
+//   })
+// })

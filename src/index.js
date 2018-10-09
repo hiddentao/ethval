@@ -5,13 +5,17 @@ const toDecimal = v => (isBN(v) ? new Decimal(v.toString(10)) : new Decimal(v))
 
 export default class EthValue {
   constructor(src, unit = 'wei') {
-    this._n = toDecimal(src)
-    this._unit = unit
+    if (src instanceof EthValue) {
+      this._n = toDecimal(src._n)
+      this._unit = src._unit
+    } else {
+      this._n = toDecimal(src)
+      this._unit = unit
+    }
     ;['mul', 'sub', 'div', 'add'].forEach(method => {
-      this[method] = v => {
-        this._n = this._n[method].call(this._n, toDecimal(v))
-        return this
-      }
+      this[method] = v => (
+        new EthValue(this._n[method].call(this._n, toDecimal(v)), this._unit)
+      )
     })
   }
 
@@ -40,14 +44,18 @@ export default class EthValue {
   }
 
   toWei() {
-    if (this.isWei) return this
+    if (this.isWei) {
+      return new EthValue(this)
+    }
     if (this.isGwei) {
-      this._unit = 'wei'
-      return this.scaleDown(3)
+      const v = this.scaleDown(3)
+      v._unit = 'wei'
+      return v
     }
     if (this.isEth)  {
-      this._unit = 'wei'
-      return this.scaleDown(18)
+      const v = this.scaleDown(18)
+      v._unit = 'wei'
+      return v
     }
 
     throw new Error('Unit of measurement uncertain')
@@ -55,13 +63,17 @@ export default class EthValue {
 
   toGwei() {
     if (this.isWei) {
-      this._unit = 'gwei'
-      return this.scaleUp(3)
+      const v = this.scaleUp(3)
+      v._unit = 'gwei'
+      return v
     }
-    if (this.isGwei) return this
+    if (this.isGwei) {
+      return new EthValue(this)
+    }
     if (this.isEth) {
-      this._unit = 'gwei'
-      return this.scaleDown(15)
+      const v = this.scaleDown(15)
+      v._unit = 'gwei'
+      return v
     }
 
     throw new Error('Unit of measurement uncertain')
@@ -69,14 +81,18 @@ export default class EthValue {
 
   toEth() {
     if (this.isWei) {
-      this._unit = 'eth'
-      return this.scaleUp(18)
+      const v = this.scaleUp(18)
+      v._unit = 'eth'
+      return v
     }
     if (this.isGwei) {
-      this._unit = 'eth'
-      return this.scaleUp(15)
+      const v = this.scaleUp(15)
+      v._unit = 'eth'
+      return v
     }
-    if (this.isEth) return this
+    if (this.isEth) {
+      return new EthValue(this)
+    }
 
     throw new Error('Unit of measurement uncertain')
   }
