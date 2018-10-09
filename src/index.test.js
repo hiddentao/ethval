@@ -139,7 +139,14 @@ describe('can convert', () => {
   it('back and forth', () => {
     const e = new EthVal('1000000000000000000')
 
-    expect(e.toGwei().toEth().toWei().toEth().toGwei().toString()).toEqual('1000000000000000')
+    expect(
+      e.toGwei()
+        .toEth()
+        .toWei()
+        .toEth()
+        .toGwei()
+        .toString()
+    ).toEqual('1000000000000000')
   })
 
   it('from decimal eth to wei', () => {
