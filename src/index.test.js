@@ -136,6 +136,27 @@ describe('can convert', () => {
     expect(w.toString()).toEqual('1000000000000000000')
   })
 
+  it('using to(wei)', () => {
+    const src = new EthVal('1')
+    const v1 = src.to('wei')
+    const v2 = src.toWei()
+    expect(v1.toString()).toEqual(v2.toString())
+  })
+
+  it('using to(gwei)', () => {
+    const src = new EthVal('1')
+    const v1 = src.to('gwei')
+    const v2 = src.toGwei()
+    expect(v1.toString()).toEqual(v2.toString())
+  })
+
+  it('using to(eth)', () => {
+    const src = new EthVal('1000000000000000000')
+    const v1 = src.to('eth')
+    const v2 = src.toEth()
+    expect(v1.toString()).toEqual(v2.toString())
+  })
+
   it('back and forth', () => {
     const e = new EthVal('1000000000000000000')
 
@@ -170,6 +191,12 @@ describe('can convert', () => {
 
     try {
       new EthVal('1', 'bad').toEth()
+    } catch (err) {
+      expect(err).toBeDefined()
+    }
+
+    try {
+      new EthVal('1').to('bad')
     } catch (err) {
       expect(err).toBeDefined()
     }
@@ -212,8 +239,8 @@ describe('can output', () => {
   })
 })
 
-describe('supports calculation via', () => {
-  it('basic arithmetic', () => {
+describe('supports calculation and', () => {
+  it('does basic arithmetic', () => {
     const e = new EthVal('1.2345', 'eth').mul(10).div(5)
     const e2 = new EthVal('1.2345').mul(2)
 
@@ -229,18 +256,25 @@ describe('supports calculation via', () => {
     ).toEqual('2.268')
   })
 
-  it('arithmetic involving instances', () => {
+  it('handles instances', () => {
     const e = new EthVal(1)
     const e2 = new EthVal(13)
     const e3 = new EthVal(2)
 
     expect(e.add(e2).div(e3).toString()).toEqual('7')
   })
+
+  it('knows to ensure instances have the same units', () => {
+    const e = new EthVal(1, 'eth')
+    const e2 = new EthVal(13000000000, 'gwei')
+
+    expect(e.add(e2).toString()).toEqual('14')
+  })
 })
 
 describe('supports boolean logic via', () => {
   it('basic comparison', () => {
-    const e = new EthVal('1.2345', 'eth').mul(10).div(5)
+    const e = new EthVal('1.2345').mul(10).div(5)
     const e2 = new EthVal('12').mul(2)
     const e3 = toBN('24')
 
@@ -259,5 +293,20 @@ describe('supports boolean logic via', () => {
     expect(new EthVal(e3).eq(e2)).toEqual(true)
     expect(new EthVal(e3).gte(e2)).toEqual(true)
     expect(new EthVal(e3).lte(e2)).toEqual(true)
+  })
+
+  it('knows to ensure instances have the same units', () => {
+    const e = new EthVal(1, 'eth')
+    const e2 = new EthVal('13000000000', 'gwei')
+    const e3 = new EthVal('13000000000000000000', 'wei')
+
+    expect(e.gt(e2)).toEqual(false)
+    expect(e.lte(e2)).toEqual(true)
+
+    expect(e2.gt(e)).toEqual(true)
+    expect(e2.lte(e)).toEqual(false)
+
+    expect(e2.eq(e3)).toEqual(true)
+    expect(e3.eq(e2)).toEqual(true)
   })
 })

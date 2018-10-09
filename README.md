@@ -69,6 +69,17 @@ console.log( v.gt(200) ) // true
 console.log( v.lte(toBN('0xFFFF')) ) // true
 ```
 
+It also ensures units are aligned when performing operations:
+
+```js
+const v = new EthVal(25500)
+const v2 = new EthVal('0.2', 'eth')
+
+console.log( v2.gt(v) ) // true
+console.log( v.add(v2).toString() ) // "200000000000025500"
+console.log( v2.add(v).toString() ) // "0.2000000000000255"
+```
+
 ## API
 
 **`new EthVal(input, unit = 'wei')`**

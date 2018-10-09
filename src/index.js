@@ -3,6 +3,10 @@ import { isBN, toBN } from 'web3-utils'
 
 const toDecimal = v => (isBN(v) ? new Decimal(v.toString(10)) : new Decimal(v))
 
+const input2Dec = (original, input) => (
+  input._n ? input.to(original._unit)._n : toDecimal(input)
+)
+
 export default class EthVal {
   constructor (src, unit = 'wei') {
     if (src instanceof EthVal) {
@@ -14,11 +18,13 @@ export default class EthVal {
     }
     [ 'mul', 'sub', 'div', 'add' ].forEach(method => {
       this[method] = v => (
-        new EthVal(this._n[method].call(this._n, toDecimal(v._n || v)), this._unit)
+        new EthVal(this._n[method].call(this._n, input2Dec(this, v)), this._unit)
       )
     })
     ;[ 'gt', 'gte', 'lt', 'lte', 'eq' ].forEach(method => {
-      this[method] = v => this._n[method].call(this._n, toDecimal(v._n || v))
+      this[method] = v => (
+        this._n[method].call(this._n, input2Dec(this, v))
+      )
     })
   }
 
@@ -98,6 +104,19 @@ export default class EthVal {
     }
 
     throw new Error('Unit of measurement uncertain')
+  }
+
+  to (unit) {
+    switch (unit) {
+      case 'wei':
+        return this.toWei()
+      case 'gwei':
+        return this.toGwei()
+      case 'eth':
+        return this.toEth()
+      default:
+        throw new Error(`Unrecognized unit: ${unit}`)
+    }
   }
 
   toString (v) {
