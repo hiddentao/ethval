@@ -25,7 +25,9 @@ const EthVal = require('ethval')
 
 const balance = await web3.eth.getBalance(account) // returns BN.js instance
 
-console.log( new EthVal(balance).toEth().toFixed(2) ) // e.g. "0.02"
+// assume balance is 20000000000000000 wei (=0.02eth)
+
+console.log( new EthVal(balance).toEth().mul(2).toFixed(2) ) // "0.04"
 ```
 
 Use it calculate the Wei/Gwei/Eth equivalent of a given value:
