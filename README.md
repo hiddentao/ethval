@@ -47,6 +47,15 @@ console.log( b.toString(16) ) // "0xff"
 console.log( b.toString(2) ) // "11111111"
 ```
 
+Basic arithmetic supported fully:
+
+```js
+const v = new EthVal(255)
+const b = await web3.eth.getBalance('0x...') // assume balance is 100 wei
+
+console.log( v.div(5).add(b).mul(2).sub(2).toString(16) ) // 0x64 (=100 in base-10)
+```
+
 ## API
 
 **`new EthValue(input, unit = 'wei')`**
