@@ -210,6 +210,12 @@ describe('can output', () => {
     expect(e.toString()).toEqual('1.2345')
   })
 
+  it('decimal numbers', () => {
+    const e = new EthVal('1.2345', 'eth')
+
+    expect(e.toNumber()).toEqual(1.2345)
+  })
+
   it('hex strings', () => {
     const e = new EthVal('123456')
 

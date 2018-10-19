@@ -137,6 +137,10 @@ export default class EthVal {
     return this._n.toFixed(v)
   }
 
+  toNumber () {
+    return this._n.toNumber()
+  }
+
   toWeiBN () {
     return toBN(new EthVal(this.toString(), this._unit).toWei().toString())
   }
