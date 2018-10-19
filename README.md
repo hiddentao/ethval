@@ -164,6 +164,10 @@ For example, if `base` is 2 then a binary string representation is returned, if
 
 * `base` - either 2, 16 or 10.
 
+**`.toNumber()`**
+
+Return base-10 `Number` representation of this value.
+
 **`.toFixed(precision)`**
 
 Return base-10 decimal-point representation of this value to the given precision.
