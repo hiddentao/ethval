@@ -316,3 +316,10 @@ describe('supports boolean logic via', () => {
     expect(e3.eq(e2)).toEqual(true)
   })
 })
+
+describe('supports large numbers', () => {
+  it('can output them upto 256 bits in size', () => {
+    expect(new EthVal('13000000000000', 'eth').toWei().toString(10)).toEqual('13000000000000000000000000000000')
+    expect(new EthVal('-13000000000000', 'eth').toWei().toString(10)).toEqual('-13000000000000000000000000000000')
+  })
+})

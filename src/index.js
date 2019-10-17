@@ -1,7 +1,9 @@
 import { Decimal } from 'decimal.js'
 import { isBN, toBN } from 'web3-utils'
 
-const toDecimal = v => (isBN(v) ? new Decimal(v.toString(10)) : new Decimal(v))
+const PreciseDecimal = Decimal.clone({ defaults: true, toExpPos: 33 })
+
+const toDecimal = v => (isBN(v) ? new PreciseDecimal(v.toString(10)) : new PreciseDecimal(v))
 
 const input2Dec = (original, input) => (
   input._n ? input.to(original._unit)._n : toDecimal(input)
