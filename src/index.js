@@ -1,9 +1,18 @@
 import { Decimal } from 'decimal.js'
-import { isBN, toBN } from 'web3-utils'
 
 const PreciseDecimal = Decimal.clone({ defaults: true, toExpPos: 33 })
 
-const toDecimal = v => (isBN(v) ? new PreciseDecimal(v.toString(10)) : new PreciseDecimal(v))
+const toDecimal = a => {
+  if (a) {
+    if (a._hex) {
+      a = a._hex
+    } else if (a._isBigNumber) {
+      a = a.toString(10)
+    }
+  }
+
+  return new PreciseDecimal(`${a}`)
+}
 
 const input2Dec = (original, input) => (
   input._n ? input.to(original._unit)._n : toDecimal(input)
@@ -141,9 +150,5 @@ export default class EthVal {
 
   toNumber () {
     return this._n.toNumber()
-  }
-
-  toWeiBN () {
-    return toBN(new EthVal(this.toString(), this._unit).toWei().toString())
   }
 }

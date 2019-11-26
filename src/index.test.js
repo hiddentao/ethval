@@ -1,4 +1,4 @@
-import { isBN, toBN } from 'web3-utils'
+import web3 from 'web3'
 
 import EthVal from './'
 
@@ -19,8 +19,13 @@ describe('can be constructed', () => {
   })
 
   it('from a BN.js instance', () => {
-    const bn = toBN('0xFF')
+    const bn = web3.utils.toBN('0xFF')
     const val = new EthVal(bn)
+    expect(val.toString()).toEqual('255')
+  })
+
+  it('from an object with _hex property', () => {
+    const val = new EthVal({ _hex: '0xFF' })
     expect(val.toString()).toEqual('255')
   })
 
@@ -233,16 +238,6 @@ describe('can output', () => {
 
     expect(e.toFixed(2)).toEqual('1.79')
   })
-
-  it('BN.js instance representing Wei value', () => {
-    const e = new EthVal('1.2345', 'eth')
-
-    const out = e.toWeiBN()
-
-    expect(isBN(out)).toEqual(true)
-
-    expect(out.toString(10)).toEqual('1234500000000000000')
-  })
 })
 
 describe('supports calculation and', () => {
@@ -282,7 +277,7 @@ describe('supports boolean logic via', () => {
   it('basic comparison', () => {
     const e = new EthVal('1.2345').mul(10).div(5)
     const e2 = new EthVal('12').mul(2)
-    const e3 = toBN('24')
+    const e3 = web3.utils.toBN('24')
 
     expect(e2.gt(e)).toEqual(true)
     expect(e.lt(e2)).toEqual(true)

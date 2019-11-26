@@ -174,10 +174,6 @@ Return base-10 decimal-point representation of this value to the given precision
 
 * `precision` - maximum no. of numbers after the decimal point.
 
-**`.toWeiBN()`**
-
-Return a `BN` instance representing this value when converted to its `wei` equivalent.
-
 **`.isWei`**
 
 Whether the current unit is `wei`.
