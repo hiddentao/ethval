@@ -1,6 +1,6 @@
 {
   "name": "ethval",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Easier calculation and formatting of Ethereum values",
   "main": "dist/index.js",
   "module": "src/index.js",
@@ -12,7 +12,8 @@
     "build": "babel src -d dist --ignore *.test.js",
     "lint": "eslint src",
     "test": "jest --no-cache",
-    "test:coverage": "yarn test --coverage"
+    "test:coverage": "yarn test --coverage",
+    "prepublish": "npm run lint && npm run test && npm run build"
   },
   "repository": {
     "type": "git",
