@@ -126,6 +126,10 @@ Divide this value by `input` and return a new `EthVal` instance.
 
 * `input` - _same as for the `EthVal` constructor_
 
+**`.round()`**
+
+Round this value to the nearest integer (i.e 0 decimal places) and return a new `EthVal` instance.
+
 **`.eq(input)`**
 
 Get whether this value equals `input`. Returns `true` or `false`.

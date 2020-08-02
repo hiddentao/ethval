@@ -63,6 +63,10 @@ export default class EthVal {
     return this.div(toDecimal(10).pow(toDecimal(v)))
   }
 
+  round () {
+    return new EthVal(this._n.toDecimalPlaces(0))
+  }
+
   toWei () {
     if (this.isWei) {
       return new EthVal(this)

@@ -1,6 +1,6 @@
 {
   "name": "ethval",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Easier calculation and formatting of Ethereum values",
   "main": "dist/index.js",
   "module": "src/index.js",

@@ -271,6 +271,16 @@ describe('supports calculation and', () => {
 
     expect(e.add(e2).toString()).toEqual('14')
   })
+
+  it('has rounding too', () => {
+    const e1 = new EthVal(1.49)
+    const e2 = new EthVal(1.50)
+    const e3 = new EthVal(1)
+
+    expect(e1.round().toString()).toEqual('1')
+    expect(e2.round().toString()).toEqual('2')
+    expect(e3.round().toString()).toEqual('1')
+  })
 })
 
 describe('supports boolean logic via', () => {
